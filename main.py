@@ -1,16 +1,18 @@
-# This is a sample Python script.
-
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
-
-
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+import matplotlib.pyplot as plt
+import numpy as np
+from scipy import integrate
 
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
+x = np.linspace(-np.pi, np.pi, 100)
+y = np.exp(x)*np.sin(2*x)
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+fig, ax = plt.subplots()
+
+ax.plot(x, y, linewidth=2.0)
+plt.axvline(x=0, color='black', label='X')
+plt.axhline(y=0, color='black', label='Y')
+
+ax.set(xlim=(-3, 3), xticks=np.arange(-3, 3),
+       ylim=(-1, 4), yticks=np.arange(0, 4))
+plt.grid(True)
+plt.show()
