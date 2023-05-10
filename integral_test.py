@@ -5,21 +5,23 @@ import numpy as np
 x = np.arange(1, 11, 1)
 # print(x[1])
 # print(type(x))
-
-def integrating():
+n = 10
+def integrating(n):
     spisok1 = []
     x = 10
-    print(x)
-    n = 10
+
     for a in range(x):
         spisok = []
         spisok1.append(spisok)
         for i in range(n):
             i = i+1
-            print(i)
             spisok.append(i)
     return spisok1
-print('+++++++', integrating())
+print('+++++++', integrating(n))
+a = integrating(n)
+b = a[0]
+print(a[0])
+print(b[0])
 
 
 
