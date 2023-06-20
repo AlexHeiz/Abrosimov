@@ -4,10 +4,9 @@ from scipy.integrate import quad
 
 
 N = 70
-
 def my_func(x):
-    return np.exp(x) * np.sin(2 * x)
-
+    return 3.5 * ((1/np.power(1-(x/6.5),2))-1)
+#3.5 * ((1/np.power(1-(x/6.5),2))-1)
 
 def integrate_a_0_koef(my_func):
     koef_a_0 = quad(my_func, -np.pi, np.pi)
@@ -17,10 +16,10 @@ def integrate_a_0_koef(my_func):
 
 
 def func_cos(i):
-    return lambda x: np.exp(x) * np.sin(2 * x)*np.cos((i*x)/2)
+    return lambda x: 3.5 * ((1/np.power(1-(x/6.5),2))-1)*np.cos((i*x))
 
 def func_sin(i):
-    return lambda x: np.exp(x) * np.sin(2 * x)*np.sin((i*x)/2)
+    return lambda x: 3.5 * ((1/np.power(1-(x/6.5),2))-1)*np.sin((i*x))
 
 def koef_an_bn():
     mass_an = []
@@ -36,11 +35,11 @@ def koef_an_bn():
 
 an_values = koef_an_bn()[0]
 bn_values = koef_an_bn()[1]
-x = np.linspace(-np.pi, np.pi, 100)
+x = np.linspace(-10*np.pi, np.pi, 1000)
 y = my_func(x)
 fig, ax = plt.subplots()
 
-
+#all garmonics
 y1 = (integrate_a_0_koef(my_func)/2) + an_values[0]*np.cos(x/2)+bn_values[0]*np.sin(x/2)
 ax.plot(x, y1, linewidth=1.0, color='gray')
 for i in range(1, N):
@@ -49,13 +48,26 @@ for i in range(1, N):
     y1 += an_values[i]*np.cos((i*x)/2)+bn_values[i]*np.sin((i*x)/2)
     ax.plot(x, y1, linewidth=1.0, color='gray')
 
+#last garmonic
+# y1 = (integrate_a_0_koef(my_func)/2) + an_values[0]*np.cos(x/2)+bn_values[0]*np.sin(x/2)
+# ax.plot(x, y1, linewidth=1.0, color='gray')
+# for i in range(1, N):
+#     if i == N-1:
+#         break
+#     y1 += an_values[i]*np.cos((i*x)/2)+bn_values[i]*np.sin((i*x)/2)
+#     if i == N-2:
+#         ax.plot(x, y1, linewidth=1.0, color='gray')
+
+
+
+
 
 ax.plot(x, y, linewidth=3.0)
 
 plt.axvline(x=0, color='black', label='X')
 plt.axhline(y=0, color='black', label='Y')
 
-ax.set(xlim=(-np.pi, np.pi), xticks=np.arange(-3, 3),
-       ylim=(-3, 3), yticks=np.arange(-3, 3))
+ax.set(xlim=(-10*np.pi, np.pi), xticks=np.arange(-10*3, 3),
+       ylim=(-3, 6), yticks=np.arange(-3, 6))
 plt.grid(True)
 plt.show()
